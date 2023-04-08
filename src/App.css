@@ -70,11 +70,16 @@ h6 {
   font-family: Rubik, sans-serif;
 }
 
-/* #map {
+.map {
   background-color: rgba(0, 0, 0, 0.2);
   width: 100%;
   height: 470px;
-} */
+}
+
+.mapcontainer{
+  height: 100%;
+  width: 100%;
+}
 
 .text {
   position: absolute;

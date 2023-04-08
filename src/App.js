@@ -2,6 +2,8 @@ import "./App.css";
 import bimg from "./images/pattern-bg-desktop.png";
 import arrow from "./images/icon-arrow.svg";
 import React, { useState, useEffect } from "react";
+import { MapContainer, TileLayer } from "react-leaflet";
+
 
 const API_KEY = "at_WkSjDUL0hrY9LovERCXy7FmsVqaIx";
 
@@ -79,12 +81,26 @@ function App() {
       <div className="background">
         <img src={bimg} alt="" />
       </div>
-      <div className="map"></div>
+
+      <div className="map">
+        <MapContainer className="mapcontainer"
+          center={[51.505, -0.09]}
+          zoom={13}
+          scrollWheelZoom={false}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          {/* <Marker position={[51.505, -0.09]}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker> */}
+        </MapContainer>
+      </div>
     </div>
   );
 }
 
 export default App;
-
-//wefekac976@fectode.com
-//ipify#20
