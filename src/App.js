@@ -2,38 +2,48 @@ import "./App.css";
 import bimg from "./images/pattern-bg-desktop.png";
 import arrow from "./images/icon-arrow.svg";
 import React, { useState, useEffect } from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
-
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 const API_KEY = "at_WkSjDUL0hrY9LovERCXy7FmsVqaIx";
 
 function App() {
   const [ip, setIp] = useState("-");
   const [location, setLocation] = useState("-");
+  const [city, setCity] = useState("-");
   const [timezone, setTimezone] = useState("-");
   const [isp, setISP] = useState("-");
+  const [lat, setLat] = useState(51.505);
+  const [lng, setLng] = useState(-0.09);
 
   const findlocation = async (ip) => {
     const response = await fetch(
-      `https://geo.ipify.org/api/v2/country?apiKey=${API_KEY}&ipAddress=${ip}`
+      `https://geo.ipify.org/api/v2/country,city?apiKey=${API_KEY}&ipAddress=${ip}`
     );
+
     const data = await response.json();
     setIp(data.ip);
     setLocation(data.location.country);
+    setCity(data.location.city);
     setTimezone(data.location.timezone);
     setISP(data.isp);
+    setLat(data.location.lat);
+    setLng(data.location.lng);
   };
 
   useEffect(() => {
     const runAPI = async () => {
       const response = await fetch(
-        `https://geo.ipify.org/api/v2/country?apiKey=${API_KEY}`
+        `https://geo.ipify.org/api/v2/country,city?apiKey=${API_KEY}`
       );
+
       const data = await response.json();
       setIp(data.ip);
       setLocation(data.location.country);
+      setCity(data.location.city);
       setTimezone(data.location.timezone);
       setISP(data.isp);
+      setLat(data.location.lat);
+      setLng(data.location.lng);
     };
 
     runAPI();
@@ -65,7 +75,9 @@ function App() {
           </div>
           <div className="section2">
             <span>LOCATION</span>
-            <div className="section-output">{location}</div>
+            <div className="section-output">
+              {location},{city}
+            </div>
           </div>
           <div className="section3">
             <span>TIMEZONE</span>
@@ -83,8 +95,9 @@ function App() {
       </div>
 
       <div className="map">
-        <MapContainer className="mapcontainer"
-          center={[51.505, -0.09]}
+        <MapContainer
+          className="mapcontainer"
+          center={[lat, lng]}
           zoom={13}
           scrollWheelZoom={false}
         >
@@ -92,11 +105,11 @@ function App() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          {/* <Marker position={[51.505, -0.09]}>
+          <Marker position={[lat, lng]}>
             <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
+              {lat},{lng} <br /> IP address location
             </Popup>
-          </Marker> */}
+          </Marker>
         </MapContainer>
       </div>
     </div>

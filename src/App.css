@@ -73,7 +73,9 @@ h6 {
 .map {
   background-color: rgba(0, 0, 0, 0.2);
   width: 100%;
-  height: 470px;
+  height: 370px;
+  z-index: 0;
+  position: relative;
 }
 
 .mapcontainer{
@@ -133,6 +135,8 @@ h6 {
 }
 
 .output {
+  position: relative;
+  z-index: 1;
   display: flex;
   gap: 2rem;
   background-color: white;
