@@ -12,7 +12,7 @@ function App() {
   const [city, setCity] = useState("-");
   const [timezone, setTimezone] = useState("-");
   const [isp, setISP] = useState("-");
-  const [lat, setLat] = useState(51.505);
+  const [lat, setLat] = useState(13.505);
   const [lng, setLng] = useState(-0.09);
 
   const findlocation = async (ip) => {
