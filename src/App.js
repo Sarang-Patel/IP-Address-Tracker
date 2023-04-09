@@ -1,10 +1,11 @@
 import "./App.css";
 import bimg from "./images/pattern-bg-desktop.png";
 import arrow from "./images/icon-arrow.svg";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import ChangeMapView from "./component/ChangeMapView";
 
-const API_KEY = "at_WkSjDUL0hrY9LovERCXy7FmsVqaIx";
+const API_KEY = "at_5n9xueKc3IwtvM2l7uTxWSrepf3qr";
 
 function App() {
   const [ip, setIp] = useState("-");
@@ -12,9 +13,8 @@ function App() {
   const [city, setCity] = useState("-");
   const [timezone, setTimezone] = useState("-");
   const [isp, setISP] = useState("-");
-  const [lat, setLat] = useState(13.505);
+  const [lat, setLat] = useState(51.505);
   const [lng, setLng] = useState(-0.09);
-
   const findlocation = async (ip) => {
     const response = await fetch(
       `https://geo.ipify.org/api/v2/country,city?apiKey=${API_KEY}&ipAddress=${ip}`
@@ -52,6 +52,7 @@ function App() {
   const inputChange = (e) => {
     setIp(e.target.value);
   };
+
 
   return (
     <div className="App">
@@ -95,22 +96,26 @@ function App() {
       </div>
 
       <div className="map">
-        <MapContainer
-          className="mapcontainer"
-          center={[lat, lng]}
-          zoom={13}
-          scrollWheelZoom={false}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <Marker position={[lat, lng]}>
-            <Popup>
-              {lat},{lng} <br /> IP address location
-            </Popup>
-          </Marker>
-        </MapContainer>
+        
+          <MapContainer
+            
+            className="mapcontainer"
+            center={[lat, lng]}
+            zoom={13}
+            scrollWheelZoom={false}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={[lat, lng]}>
+              <Popup>
+                {lat},{lng} <br /> IP address location
+              </Popup>
+            </Marker>
+            <ChangeMapView coords={[lat,lng]}/>
+          </MapContainer>
+        
       </div>
     </div>
   );
