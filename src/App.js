@@ -5,7 +5,7 @@ import React, { useState, useEffect} from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import ChangeMapView from "./component/ChangeMapView";
 
-const API_KEY = "at_5n9xueKc3IwtvM2l7uTxWSrepf3qr";
+const API_KEY = "at_GtHIcXQwXYoMZH6wvnWpQx2tlUNhO";
 
 function App() {
   const [ip, setIp] = useState("-");
